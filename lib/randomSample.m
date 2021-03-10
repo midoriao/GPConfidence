@@ -13,7 +13,9 @@ function [logs, vars, ranges] = randomSample(br, budget, phi, cp, tspan, input_n
     logs.X_log = [];
     logs.obj_log = [];
 
-    for i = 1: budget
+    while true
+	quit = false;
+	for i = 1: budget
 
         x_list = [];
         [dim, ~] = size(input_range);
@@ -37,10 +39,20 @@ function [logs, vars, ranges] = randomSample(br, budget, phi, cp, tspan, input_n
 
         br.Sim(0:.01:30);
         obj = br.CheckSpec(phi)
-        logs.obj_log = [logs.obj_log obj];
-		vars = br.GetSysVariables();
-		ranges = br.GetParamRanges(vars);
-
+	if obj < 0
+		quit = true;
+		break;
+	end
+	logs.obj_log = [logs.obj_log obj];
+	
+	
+	end
+	if quit == true
+		continue;
+	else
+		break;	
+	end
     end
-
+    vars = br.GetSysVariables();
+    ranges = br.GetParamRanges(vars);
 end
