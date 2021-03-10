@@ -82,7 +82,7 @@ for ph in phi_str:
 	for cp in controlpoints:
 		for opt in optimization:
 			property = ph.split(';')
-			ts = time.strftime('%Y%m%d-%H%M',time.localtime(time.time()))
+			ts = time.strftime('%Y%m%d%H%M',time.localtime(time.time()))
 			filename = model+  '_' + property[0] + '_' + str(cp)  +'_' + opt + '_' + str(max_sim)
 
 			param = '\n'.join(parameters)
@@ -139,7 +139,7 @@ for ph in phi_str:
 					bm.write('\tlogs.obj_log = tlogs[1:ns];\n')
 					bm.write('\tsave(filename, \'logs\', \'vars\', \'ranges\');\n')
 				else:
-					bm.write('\tfilename = strcmp(\'log/' + dirname + '/\', \''  + filename + '\',\'_\', int2str(budget) , \'_\', int2str(n) , \'_\', \'' + ts + '\');\n')
+					bm.write('\tfilename = strcmp(\'log/' + dirname + '/\', \''  + filename + '\',\'_\', int2str(budget) , \'_\', int2str(n) , \'_\', \'' + ts + '.mat\');\n')
 					bm.write('\tsave(filename, \'logs\', \'vars\', \'ranges\');\n')
 				bm.write('end\n')
 				

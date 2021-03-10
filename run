@@ -9,4 +9,4 @@ log="output/$name.log"     # log stdout and stderr of the benchmark here
 # run the script with the output file name as parameter
 # 2>&1 merges stderr into stdout
 # | tee ... writes the output to the log and displays it at the same time
-exec "$script" "$csv" 2>&1 | tee "$log"
+exec "$script" 2>&1 | tee "$log"
