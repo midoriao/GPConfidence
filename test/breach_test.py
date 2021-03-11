@@ -130,7 +130,12 @@ for ph in phi_str:
 				#bm.write('algorithm = ' + opt + ';\n')
 		
 				bm.write('for n = 1:trials\n')
-				bm.write('\t[logs, vars, ranges] = breachSampling(br, budget, phi, controlpoints, tspan, input_name, input_range, solver);\n')
+				#bm.write('\t[logs, vars, ranges] = breachSampling(br, budget, phi, controlpoints, tspan, input_name, input_range, solver);\n')
+				if opt == 'random':
+					bm.write('\t[logs, vars, ranges] = randomSample(br, budget, phi, controlpoints, tspan, input_name, input_range);\n')
+				else:
+					bm.write('\t[logs, vars, ranges] = breachSampling(br, budget, phi, controlpoints, tspan, input_name, input_range, solver);\n')
+
 				if label == 'sim':
 					bm.write('\ttlogs = logs')
 					bm.write('\tfor ns = numsim\n')

@@ -2,13 +2,11 @@ classdef GPRwrapper < handle
     
     properties
         gpr
-        
-        %stepsize
         mvn
         
         N
         K
-        maxSize
+        %maxSize
         
         range
         
@@ -16,14 +14,14 @@ classdef GPRwrapper < handle
     end
     
     methods
-        function this = GPRwrapper(gpr, n, k, ms,  range, trainX)
+        function this = GPRwrapper(gpr, n, k,  range, trainX)
             
             
             
             this.gpr = gpr;
             this.N = n;
             this.K = k;
-            this.maxSize = ms;
+            %this.maxSize = ms;
             
             this.range = range;
             this.trainX = trainX;
@@ -103,7 +101,6 @@ classdef GPRwrapper < handle
             
             %compute covariance matrix
             
-            
             %covariance function 
             kf = this.gpr.Impl.Kernel.makeKernelAsFunctionOfXNXM(this.gpr.Impl.ThetaHat);
             %covariance matrix
@@ -111,8 +108,6 @@ classdef GPRwrapper < handle
             
             %instantiate MVN
             this.mvn = MVN(ypred', CM);
-            
-            
          
             
         end

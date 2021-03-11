@@ -4,17 +4,29 @@ classdef Parser < handle
         filename
         gpr
         
+        vars 
+        ranges
+        
+        lowRob
         trainX
     end
     
     methods
         function this = Parser(filename)
             this.filename = filename;
-            load(filename, 'x_log');
-            load(filename, 'obj_log');
-            xd = x_log';
+            load(filename, 'logs');
+            load(filename, 'vars');
+            load(filename, 'ranges');
+            
+            this.vars = vars;
+            this.ranges = ranges;
+            
+            xd = logs.x_log';
             this.trainX = xd;
-            yd = obj_log';
+            yd = logs.obj_log';
+            
+            this.lowRob = min(yd);
+            
             this.gpr = fitrgp(xd,yd,'KernelFunction','squaredexponential','sigma',0.1,'verbose',1);
             
         end
