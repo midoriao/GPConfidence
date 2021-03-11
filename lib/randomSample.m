@@ -15,6 +15,9 @@ function [logs, vars, ranges] = randomSample(br, budget, phi, cp, tspan, input_n
 
     for ii = 1:10
 	quit = false;
+	X_log_ = [];
+	obj_log_ = [];
+
 	for i = 1: budget
 
         x_list = [];
@@ -34,7 +37,7 @@ function [logs, vars, ranges] = randomSample(br, budget, phi, cp, tspan, input_n
         end
 
         
-        logs.X_log = [logs.X_log x_list'];
+        X_log_ = [X_log_ x_list'];
 
 
         br.Sim(0:.01:30);
@@ -43,13 +46,15 @@ function [logs, vars, ranges] = randomSample(br, budget, phi, cp, tspan, input_n
 		quit = true;
 		break;
 	end
-	logs.obj_log = [logs.obj_log obj];
+	obj_log_ = [obj_log_ obj];
 	
 	
 	end
 	if quit == true
 		continue;
 	else
+		logs.X_log = X_log_;
+		logs.obj_log = obj_log_;
 		break;	
 	end
     end

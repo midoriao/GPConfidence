@@ -33,13 +33,13 @@ function [logs, vars, ranges] = breachSampling(br, budget, phi, cp, tspan, input
 	end
 
     	falsif_pb.solve();
-	if falsif_pb.obj_best > 0 && numel(obj_log) >= budget
-		break	
+	if min(falsif_pb.obj_log) > 0 && numel(falsif_pb.obj_log) >= budget
+		logs.X_log = falsif_pb.X_log;
+		logs.obj_log = falsif_pb.obj_log;
+		break;
 	end
     end
 
-    logs.X_log = falsif_pb.X_log;
-    logs.obj_log = falsif_pb.obj_log;
 
     vars = br.GetSysVariables();
     ranges = br.GetParamRanges(vars);
