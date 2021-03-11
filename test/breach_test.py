@@ -136,7 +136,7 @@ for ph in phi_str:
 				else:
 					bm.write('\t[logs, vars, ranges] = breachSampling(br, budget, phi, controlpoints, tspan, input_name, input_range, solver);\n')
 
-                                bm.write('\tif numel(logs.obj_log) ~= 0\n')
+				bm.write('\tif numel(logs.obj_log) ~= 0\n')
 				if label == 'sim':
 					bm.write('\t\ttlogs = logs;\n')
 					bm.write('\t\tfor ns = numsim\n')
@@ -144,11 +144,11 @@ for ph in phi_str:
 					bm.write('\t\t\tlogs.X_log = tlogs[:, 1:ns];\n')
 					bm.write('\t\t\tlogs.obj_log = tlogs[1:ns];\n')
 					bm.write('\t\t\tsave(filename, \'logs\', \'vars\', \'ranges\');\n')
-                                        bm.write('\t\tend\n')
+					bm.write('\t\tend\n')
 				else:
 					bm.write('\t\tfilename = strcat(\'log/' + dirname + '/\', \''  + filename + '\',\'_\', int2str(budget) , \'_\', int2str(n) , \'_\', \'' + ts + '.mat\');\n')
 					bm.write('\t\tsave(filename, \'logs\', \'vars\', \'ranges\');\n')
-                                bm.write('\tend\n')
+				bm.write('\tend\n')
 				bm.write('end\n')
 				
 				bm.write('quit\n')
