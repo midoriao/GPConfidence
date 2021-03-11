@@ -1,4 +1,5 @@
 function result(folder)
+    addpath('src/')
     files = dir(folder);
     cov = [];
     lowRob = [];
