@@ -19,7 +19,7 @@ function [logs, vars, ranges] = breachSampling(br, budget, phi, cp, tspan, input
     logs = [];
     logs.X_log = [];
     logs.obj_log = [];
-    while true
+    for ii = 1:10
     	falsif_pb = FalsificationProblem(br, phi);
     	falsif_pb.max_time = Inf;
     	falsif_pb.max_obj_eval = budget;

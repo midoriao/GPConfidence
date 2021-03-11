@@ -13,7 +13,7 @@ function [logs, vars, ranges] = randomSample(br, budget, phi, cp, tspan, input_n
     logs.X_log = [];
     logs.obj_log = [];
 
-    while true
+    for ii = 1:10
 	quit = false;
 	for i = 1: budget
 
