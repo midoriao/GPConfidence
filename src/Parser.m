@@ -21,7 +21,7 @@ classdef Parser < handle
             this.vars = vars;
             this.ranges = ranges;
             
-            xd = logs.x_log';
+            xd = logs.X_log';
             this.trainX = xd;
             yd = logs.obj_log';
             
