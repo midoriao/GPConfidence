@@ -33,7 +33,7 @@ classdef GPRwrapper < handle
             
             %obtain the x that's included in
             
-            Kappa = 2;
+            Kappa = 1.96;
             AFcn = @(X)bayesoptim.lowerConfidenceBound(X, this.gpr, Kappa);
             %XBest = iFminbndGlobal(@constraintWeightedNegAF, VarSpec.LBTrans, ...
                    % VarSpec.UBTrans, this.PrivOptions.NumRestartCandidates, ...
@@ -83,7 +83,6 @@ classdef GPRwrapper < handle
             %remove duplication
             xx = unique([X;xs],'rows');
             
-            
             function y = fcn(x)
                 y = -AFcn(x);
             end
@@ -105,9 +104,9 @@ classdef GPRwrapper < handle
             kf = this.gpr.Impl.Kernel.makeKernelAsFunctionOfXNXM(this.gpr.Impl.ThetaHat);
             %covariance matrix
             CM = kf(Xtest, Xtest) - kf(Xtest, this.trainX)*(kf(this.trainX, this.trainX)^-1)*kf(this.trainX, Xtest);
-            
+            CMM = round(CM, 2);
             %instantiate MVN
-            this.mvn = MVN(ypred', CM);
+            this.mvn = MVN(ypred', CMM);
          
             
         end

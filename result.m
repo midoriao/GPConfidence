@@ -8,6 +8,8 @@ function result(folder)
         files{end + 1} = files_struct(i).name;
     end
     
+    num = 2000;
+    
     cov = [];
     lowRob = [];
     time = [];
@@ -15,7 +17,7 @@ function result(folder)
     for f = files
         fns{end + 1} = f;
         tic;
-        ps = Parser(strcat(folder, '/', f{1}));
+        ps = Parser(strcat(folder, '/', f{1}), num);
         lowRob = [lowRob; ps.lowRob];
         
         g = GPRwrapper(ps.gpr, 1000, 10, ps.ranges, ps.trainX);
