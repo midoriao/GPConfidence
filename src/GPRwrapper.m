@@ -46,9 +46,10 @@ classdef GPRwrapper < handle
             UBt = this.range(:,2)';
             
             %randomly generate N numbers
-            Unifs = rand(this.N, size(LBt,2));
-            X = Unifs .* repmat(UBt - LBt, this.N, 1);
-            X = X + repmat(LBt, this.N, 1);
+            %Unifs = rand(this.N, size(LBt,2));
+            %X = Unifs .* repmat(UBt - LBt, this.N, 1);
+            %X = X + repmat(LBt, this.N, 1);
+            X = rand(this.N, size(LBt,2));
             
             %select the best K ones.
             fvals = fcn(X);
@@ -96,7 +97,7 @@ classdef GPRwrapper < handle
             end
             
             Xtest = xx;
-            [ypred] = predict(this.gpr,Xtest);
+            [ypred] = predict(this.gpr, Xtest);
             
             %compute covariance matrix
             

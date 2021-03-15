@@ -8,7 +8,7 @@ function result(folder)
         files{end + 1} = files_struct(i).name;
     end
     
-    num = 2000;
+    num = 20000;
     
     cov = [];
     lowRob = [];
