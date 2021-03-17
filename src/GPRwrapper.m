@@ -63,7 +63,7 @@ classdef GPRwrapper < handle
             for row = sizeX:-1:1
                 [xs(row,:), fvals(row)] = fminsearch(@boundedFcn, X(row,:), ...
                     optimset(...
-                    'MaxIter', 300, ...
+                    'MaxIter', 500, ...
                     'TolX', Inf, ...
                     'TolFun', 1.0000e-03));
             end
@@ -71,19 +71,23 @@ classdef GPRwrapper < handle
             
             
             %remove X if X's lower bound is above 0
-            for ro = this.K:-1:1
-                if fvals >=0
-                    X = X(rows(1:ro),:);
-                    fvals = fvals(rows(1:ro));
-                end
-                
-            end
-            
-            
+            %sizeXS = numel(fvals);
+            %for ro = sizeXS:-1:1
+            %    if fvals(ro) >= 0
+            %        xs(ro,:) = [];
+            %        fvals(ro) = [];
+            %    end
+            %end
+            %for ro = this.K:-1:1
+            %    if fvals >= 0
+            %        X = X(rows(1:ro),:);
+            %        fvals = fvals(rows(1:ro));
+            %    end   
+            %end
             
             %remove duplication
-            xx = unique([X;xs],'rows');
-            
+            xx = unique(xs,'rows');
+
             function y = fcn(x)
                 y = -AFcn(x);
             end

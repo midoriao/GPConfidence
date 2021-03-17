@@ -34,7 +34,7 @@ classdef Parser < handle
             
             this.gpr = fitrgp(xd_n, yd, 'KernelFunction','squaredexponential', 'FitMethod', 'exact', 'PredictMethod', 'exact', 'sigma', 0.1, 'verbose',1);
             gpr = this.gpr;
-            save(strrep(filename, '.mat', '_gpr.mat'), 'gpr');
+            save(strrep(filename, '.mat', '_gpr.mat'), 'gpr', '-v7.3');
         end
         
         
