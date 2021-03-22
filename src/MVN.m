@@ -23,12 +23,16 @@ classdef MVN< handle
             this.sigma = round(this.sigma,2);
             this.sigma
             issymmetric(this.sigma)
-            eig(this.sigma)
-            
+            ei = eig(this.sigma)
             %prob = 1- mvncdf(Xl,Xu,this.mu,this.sigma)
-            res  = newMvncdf(Xl-this.mu, Xu -this.mu,  this.sigma,100)
-            prob = 1- res.prob
             
+            if rcond(this.sigma) < 1e-12 
+    % This matrix doesn't look good
+                prob = NaN;
+            else
+                res  = newMvncdf(Xl-this.mu, Xu -this.mu,  this.sigma, 100)
+                prob = 1- res.prob
+            end
         end
         
     end

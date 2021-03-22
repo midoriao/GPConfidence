@@ -8,20 +8,24 @@ function result(folder)
         files{end + 1} = files_struct(i).name;
     end
     
-    num = 20000;
+    num = 2000;
     
     cov = [];
     lowRob = [];
     time = [];
     fns = {};
     for f = files
+        if contains(f{1}, 'gpr')
+            continue
+        end
+        f{1}
         fns{end + 1} = f;
         tic;
         ps = Parser(strcat(folder, '/', f{1}), num);
         lowRob = [lowRob; ps.lowRob];
         
         g = GPRwrapper(ps.gpr, 1000, 20, ps.ranges, ps.trainX);
-        cov_ = g.mvn.appro_mvncdf();
+        cov_ = g.getMVN();
         cov = [cov; cov_];
         
         tc = toc;

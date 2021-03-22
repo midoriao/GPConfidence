@@ -26,10 +26,10 @@ classdef GPRwrapper < handle
             this.range = range;
             this.trainX = trainX;
                        
-            this.getMVN();
+            %this.getMVN();
         end
         
-        function getMVN(this)
+        function prob = getMVN(this)
             
             %obtain the x that's included in
             
@@ -101,18 +101,21 @@ classdef GPRwrapper < handle
             end
             
             Xtest = xx;
-            [ypred] = predict(this.gpr, Xtest);
+            [ypred, yvar] = predict(this.gpr, Xtest);
             
-            %compute covariance matrix
             
-            %covariance function 
-            kf = this.gpr.Impl.Kernel.makeKernelAsFunctionOfXNXM(this.gpr.Impl.ThetaHat);
-            %covariance matrix
-            CM = kf(Xtest, Xtest) - kf(Xtest, this.trainX)*(kf(this.trainX, this.trainX)^-1)*kf(this.trainX, Xtest);
-            CMM = round(CM, 2);
-            %instantiate MVN
-            this.mvn = MVN(ypred', CMM);
-         
+            if ~any(ypred - 1.95*yvar < 0)
+                %the probability that there exists falsifying input
+                prob = 0;
+            else
+                kf = this.gpr.Impl.Kernel.makeKernelAsFunctionOfXNXM(this.gpr.Impl.ThetaHat);
+                %covariance matrix
+                CM = kf(Xtest, Xtest) - kf(Xtest, this.trainX)*(kf(this.trainX, this.trainX)^-1)*kf(this.trainX, Xtest);
+                CMM = round(CM, 2);
+                %instantiate MVN
+                this.mvn = MVN(ypred', CMM);
+                prob = this.mvn.appro_mvncdf();
+            end 
             
         end
         
