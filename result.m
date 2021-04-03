@@ -24,7 +24,7 @@ function result(folder)
         ps = Parser(strcat(folder, '/', f{1}), num);
         lowRob = [lowRob; ps.lowRob];
         
-        g = GPRwrapper(ps.gpr, 1000, 20, ps.ranges, ps.trainX);
+        g = GPRwrapper(ps.gpr, 10000, 20, ps.ranges, ps.trainX);
         cov_ = g.getMVN();
         cov = [cov; cov_];
         

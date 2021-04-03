@@ -111,9 +111,9 @@ classdef GPRwrapper < handle
                 kf = this.gpr.Impl.Kernel.makeKernelAsFunctionOfXNXM(this.gpr.Impl.ThetaHat);
                 %covariance matrix
                 CM = kf(Xtest, Xtest) - kf(Xtest, this.trainX)*(kf(this.trainX, this.trainX)^-1)*kf(this.trainX, Xtest);
-                CMM = round(CM, 2);
+                
                 %instantiate MVN
-                this.mvn = MVN(ypred', CMM);
+                this.mvn = MVN(ypred', CM);
                 prob = this.mvn.appro_mvncdf();
             end 
             
