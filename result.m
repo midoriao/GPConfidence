@@ -14,6 +14,7 @@ function result(folder)
     lowRob = [];
     time = [];
     fns = {};
+    spec = {};
     for f = files
         if contains(f{1}, 'gpr')
             continue
@@ -28,10 +29,12 @@ function result(folder)
         cov_ = g.getMVN();
         cov = [cov; cov_];
         
+        spec{end + 1} = ps.spec;
+        
         tc = toc;
         time = [time;tc];
     end
-    res = table(fns', cov, lowRob, time);
+    res = table(fns', spec', cov, lowRob, time);
     res_name = split(folder, '/');
     writetable(res, strcat('results/', res_name{2}, '.csv'),'Delimiter',';');
 end
