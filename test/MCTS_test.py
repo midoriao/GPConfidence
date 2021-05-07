@@ -26,7 +26,7 @@ addpath = []
 argument = ''
 label = ''
 
-trials = 30
+trials = ''
 #fal_home = os.environ['FALHOME']
 #br_home = os.environ['BRHOME']
 
@@ -77,6 +77,8 @@ with open('./'+sys.argv[1],'r') as conf:
 				addpath.append(argu[0])
 			elif arg == 'arg':
 				argument = argu[0]
+			elif arg == 'trials':
+				trials = argu[0]
 			elif arg == 'label':
 				label = argu[0]
 			else:
@@ -150,7 +152,7 @@ for ph in phi_str:
 								bm.write('coverage = [];\n')
 								bm.write('time_cov = [];\n')
 
-								bm.write('trials =' + str(trials)+';\n')
+								bm.write('trials =' + trials +';\n')
 								bm.write('for i = 1:trials\n')
 								bm.write('\tm = MCTS(br,N_max, scalar, phi, T, controlpoints, hill_climbing_by, T_playout, input_name, input_range, partitions);\n')
 								bm.write('\tlogs = m.log;\n')
