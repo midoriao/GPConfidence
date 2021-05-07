@@ -130,6 +130,18 @@ classdef MCTS < handle
                 else
                     break;
                 end
+				bbr = br.copy();
+				input_gen.type = 'UniStep';
+				input_gen.cp = cp;
+				bbr.SetInputGen(input_gen);
+				dim = numel(input_name);
+				for i = 1:ts
+					for j = 1:dim
+						bbr.SetParamRanges({strcat(input_name(j),'_u',num2str(i-1))}, input_range(j, :));
+					end
+				end
+				this.vars = bbr.GetSysVariables();
+				this.ranges = br.GetParamRanges(vars);
             end
         end
         
