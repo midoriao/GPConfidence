@@ -39,6 +39,8 @@ classdef MCTS < handle
         
         x_log
         obj_log
+		vars
+		ranges
         
     end
     
@@ -141,7 +143,7 @@ classdef MCTS < handle
 					end
 				end
 				this.vars = bbr.GetSysVariables();
-				this.ranges = br.GetParamRanges(vars);
+				this.ranges = bbr.GetParamRanges(vars);
             end
         end
         

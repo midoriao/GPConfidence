@@ -155,7 +155,8 @@ for ph in phi_str:
 								bm.write('trials =' + trials +';\n')
 								bm.write('for i = 1:trials\n')
 								bm.write('\tm = MCTS(br,N_max, scalar, phi, T, controlpoints, hill_climbing_by, T_playout, input_name, input_range, partitions);\n')
-								bm.write('\tlogs = m.log;\n')
+								bm.write('\tlogs.X_log = m.x_log;\n')
+								bm.write('\tlogs.obj_log = m.obj_log;\n')
 								bm.write('\tvars = m.vars;\n')
 								bm.write('\tranges = m.ranges;\n')
 
