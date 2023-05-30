@@ -54,7 +54,7 @@ with open('./'+sys.argv[1],'r') as conf:
 			elif arg == 'scalar':
 				scalar.append(float(argu[0]))
 			elif arg == 'partitions':
-				partitions.append(map(int,argu))
+				partitions.append(list(map(int,argu)))
 			elif arg == 'T_playout':
 				T_playout.append(int(argu[0]))
 			elif arg == 'N_max':
@@ -91,7 +91,7 @@ fullfn = '../log/' + dirname
 if not os.path.exists(fullfn):
 	os.mkdir(fullfn)
 
-print partitions
+print(partitions)
 for ph in phi_str:
 	for cp in controlpoints:
 		for c in scalar:
@@ -119,13 +119,13 @@ for ph in phi_str:
 								bm.write('mdl = \''+ model + '\';\n')
 								bm.write('Br = BreachSimulinkSystem(mdl);\n')
 								bm.write('br = Br.copy();\n')
-   								bm.write('N_max =' + str(nm)  + ';\n')
+								bm.write('N_max =' + str(nm)  + ';\n')
 								bm.write('scalar = '+ str(c) +';\n')
 								bm.write('phi_str = \''+ property[1] +'\';\n')
 								bm.write('phi = STL_Formula(\'phi1\',phi_str);\n') 
 								bm.write('T = ' + T + ';\n')
 								bm.write('controlpoints = '+ str(cp)+ ';\n')
- 								bm.write('hill_climbing_by = \''+ opt+'\';\n')
+								bm.write('hill_climbing_by = \''+ opt+'\';\n')
 								bm.write('T_playout = '+str(tp)+';\n')
 								bm.write('input_name = {\''+input_name[0]+'\'')
 								for inm in input_name[1:]:
