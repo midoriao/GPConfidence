@@ -1,0 +1,6 @@
+*.slxc
+slprj
+output
+results
+benchmarks
+log
