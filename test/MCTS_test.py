@@ -161,7 +161,7 @@ for ph in phi_str:
 								bm.write('\tranges = m.ranges;\n')
 
 								bm.write('\tlogname = strcat(\'log/' + dirname + '/\', \''  + filename + '\',\'_\', int2str(N_max) , \'_\', int2str(i) , \'_\', \'' + ts + '.mat\');\n')
-								bm.write('\tsave(logname,  \'logs\', \'vars\', \'ranges\');\n')
+								bm.write('\tsave(logname,  \'logs\', \'vars\', \'ranges\', \'spec\');\n')
 
 								bm.write('end\n')
 								bm.write('quit force\n')

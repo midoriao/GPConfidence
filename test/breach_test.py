@@ -147,7 +147,7 @@ for ph in phi_str:
 					bm.write('\t\tend\n')
 				else:
 					bm.write('\t\tfilename = strcat(\'log/' + dirname + '/\', \''  + filename + '\',\'_\', int2str(budget) , \'_\', int2str(n) , \'_\', \'' + ts + '.mat\');\n')
-					bm.write('\t\tsave(filename, \'logs\', \'vars\', \'ranges\');\n')
+					bm.write('\t\tsave(filename, \'logs\', \'vars\', \'ranges\', \'spec\');\n')
 				bm.write('\tend\n')
 				bm.write('end\n')
 				
