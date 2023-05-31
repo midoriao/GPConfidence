@@ -3,6 +3,7 @@
 
 .PHONY: benchmark-scripts
 benchmark-scripts:
+	mkdir -p benchmarks
 	for conf in conf/stl/*.conf; do\
 		python3 breach_test.py $${conf};\
 	done
