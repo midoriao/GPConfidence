@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export WORKSPACE_DIR=$(dirname $PWD)
+
 name="$1"     # name of the benchmark, e.g., test
 script="$2"   # file name of the script to run
 csv="$3"      # results go here (to be produced by the script)

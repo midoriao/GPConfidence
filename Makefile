@@ -1,5 +1,6 @@
 SH=$(wildcard test/benchmarks/*)
 CSV=$(SH:test/benchmarks/%=results/%.csv)
+
 DIRS=results output
 
 .PHONY: all scalac
@@ -11,6 +12,10 @@ results:
 
 output:
 	mkdir -p $@
+
+benchmarks:
+	make -C test benchmark-scripts
+	chmod +x test/benchmarks/*
 
 results/%.csv: test/benchmarks/%
 	./run $* $< $@
